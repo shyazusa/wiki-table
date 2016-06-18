@@ -11,7 +11,7 @@ get '/search' do
   keyword = URI.escape(params['keyword'].gsub("\s", '_'))
   ACCESS_URL = "#{URL}#{keyword}"
   title = get_title
-  table = make_table.gsub("\n", '<br>')
+  table = make_table
   "#{title}<br>#{ACCESS_URL}<br><br>#{table}"
 end
 
@@ -28,11 +28,11 @@ helpers do
   def make_table
     doc = access_wiki
     table = doc.xpath('//table[@class="infobox bordered"]')
-    echo = "|||\n|:---:|:---:|"
+    echo = "|||<br>|:---:|:---:|"
     table.css('tr').each do |tr|
       th = tr.css('th').text
       td = tr.css('td').text
-      echo = "#{echo}\n|#{th}|#{td}|" unless td == ''
+      echo = "#{echo}<br>|#{th}|#{td}|" unless td == ''
     end
     echo
   end
