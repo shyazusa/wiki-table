@@ -12,7 +12,7 @@ get '/search' do
   ACCESS_URL = "#{URL}#{keyword}"
   title = get_title
   table = make_table
-  "#{title}<br>#{ACCESS_URL}<br><br>#{table}"
+  "[#{title}](#{ACCESS_URL})<br><br>#{table}"
 end
 
 helpers do
