@@ -27,12 +27,13 @@ helpers do
 
   def make_table
     doc = access_wiki
-    table = doc.xpath('//table[@class="infobox bordered"]')
     echo = "|||<br>|:---:|:---:|"
-    table.css('tr').each do |tr|
-      th = tr.css('th').text
-      td = tr.css('td').text
-      echo = "#{echo}<br>|#{th}|#{td}|" unless td == ''
+    table = doc.css('table.infobox').each do |node|
+      node.css('tr').each do |tr|
+        th = tr.css('th').text
+        td = tr.css('td').text
+        echo = "#{echo}<br>|#{th}|#{td}|" unless td == ''
+      end
     end
     echo
   end
